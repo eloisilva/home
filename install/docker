@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if ! grep -q docker /etc/apt/sources.list ;then
+   echo "adding docker repo to apt sources"
+
+   # Add the new repositorie
+   curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+   # Add repositore fingerprint
+   echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" >> /etc/apt/sources.list
+fi
+
+if ! dpkg -l docker-ce > /dev/null 2>&1 ;then
+   ### Install docker
+   apt update && apt install docker-ce
+else
+   echo "docker-ce alredy installed"
+fi
