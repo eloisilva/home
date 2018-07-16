@@ -1,0 +1,15 @@
+# Basic install
+vim
+xz-utils
+build-essential
+less
+apt-file
+git
+python3-pip
+
+# Required to Docker CE Install
+apt-transport-https
+ca-certificates
+curl
+gnupg2
+software-properties-common
