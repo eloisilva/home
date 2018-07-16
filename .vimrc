@@ -96,7 +96,7 @@ endif
 "set autoread
 
 " Debian Style
-runtime! debian.vim
+"runtime! debian.vim
 
 " Enable indentation
 if has("autocmd")
