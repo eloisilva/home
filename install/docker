@@ -1,10 +1,19 @@
 #!/bin/bash
 
+PACKAGES="apt-transport-https ca-certificates curl gnupg3 software-properties-common"
+
+for package in $PACKAGES ;do
+   apt update > /dev/null
+   if ! dpkg -l $package > /dev/null 2>&1 ;then
+      apt install -y $package
+   fi
+done
+
 if ! grep -q docker /etc/apt/sources.list ;then
    echo "adding docker repo to apt sources"
 
    # Add the new repositorie
-   curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+   curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
    # Add repositore fingerprint
    echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" >> /etc/apt/sources.list
@@ -12,7 +21,8 @@ fi
 
 if ! dpkg -l docker-ce > /dev/null 2>&1 ;then
    ### Install docker
-   apt update && apt install docker-ce
+   apt update && apt install -y docker-ce
 else
    echo "docker-ce alredy installed"
+   exit 1
 fi
