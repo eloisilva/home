@@ -17,7 +17,7 @@ set relativenumber
 syntax on
 
 " Status line config
-set statusline=%!MyStatusLine()
+" set statusline=%!MyStatusLine()
 
 " Set search behave
 set ignorecase 
@@ -96,7 +96,7 @@ endif
 "set autoread
 
 " Debian Style
-"runtime! debian.vim
+runtime! debian.vim
 
 " Enable indentation
 if has("autocmd")
@@ -125,7 +125,7 @@ let g:autoHEADER_default_author = "Eloi Silva"
 autocmd FileType sh source ~/.vim/sh.vim
 
 " Python vim template
-autocmd FileType python source ~/.vim/python.vim
+" autocmd FileType python source ~/.vim/python.vim
 
 " HTML vim template
 autocmd FileType html source ~/.vim/html.vim
@@ -135,14 +135,18 @@ autocmd FileType html source ~/.vim/html.vim
 " Auto Run
 
 " Auto save and Exec Python Script
-autocmd FileType python map <F9> :w<Esc>:!clear && python %<CR>
+" autocmd FileType python map <F9> :w<Esc>:!clear && python %<CR>
 
 " Python Auto-Complete command
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 
 " Auto save and Exec Shell Script
-autocmd BufRead,BufNewFile *.sh nmap <F9> :w<Esc>:!clear && bash %<CR>
+" autocmd BufRead,BufNewFile *.sh nmap <F9> :w<Esc>:!clear && bash %<CR>
+
+
+" Enable Plug
+source ~/.vim/plugins.vim
 
 
 "-----------------------------------------------------------------
@@ -177,4 +181,14 @@ function! MyStatusLine()
     " File progress
     let statusline .= "| %P/%L"
     return statusline
+endfunction
+
+function! PyMain()
+    normal Go
+    let currline = line(".")
+    call append(currline, "def main():")
+    call append(currline+1, "    pass")
+    call append(currline+2, "")
+    call append(currline+3, "if __name__ == '__main__':")
+    call append(currline+4, "    main()")
 endfunction

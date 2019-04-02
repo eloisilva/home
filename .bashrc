@@ -37,9 +37,13 @@ lsi(){
    ls -l --color $1 |awk '{print $1, $9, $10, $11}'
 }
 
+# PS1 byMaloy
 get_branch ()
 {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 PS1='\[\033[31m\]${debian_chroot:+($debian_chroot)}\h:\[\033[0m\] (\w)\n[\A]\[\033[33m\]$(get_branch)\[\033[96m\]\$ \[\033[0m\]'
 PROMPT_COMMAND="echo"
+
+# Terminal colorized
+export TERM='screen-256color'
