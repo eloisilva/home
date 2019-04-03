@@ -2,11 +2,12 @@
 "     File Name           :     plugins.vim
 "     Created By          :     Eloi Silva
 "     Creation Date       :     [2019-03-27 04:16]
-"     Last Modified       :     [2019-03-28 23:25]
+"     Last Modified       :     [2019-04-03 03:14]
 "     Description         :      
 "--------------------------------------------------------------------------------
 
 
+"-----------------------------------------------------------------
 " install vim-Plug
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
@@ -24,6 +25,7 @@ if vim_plug_just_installed
 endif
 
 
+"-----------------------------------------------------------------
 " Plug list
 call plug#begin('~/.vim/plugged')
 
@@ -60,6 +62,8 @@ Plug 'tmux-plugins/vim-tmux'
 call plug#end()
 
 
+"-----------------------------------------------------------------
+" ALE configure
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': [
@@ -71,36 +75,17 @@ let g:ale_fixers = {
 \}
 
 
+"-----------------------------------------------------------------
+" Jedi config
 let g:jedi#completions_enabled = 1
+
+
+"-----------------------------------------------------------------
+" vim-test
 let test#python#runner = 'pytest'
 
-" Air-Line
-colorscheme molokai
-let g:airline_theme='molokai'
-"let g:airline_theme='simple'
-"
-"let g:airline_powerline_fonts = 1
 
-
-"if !exists('g:airline_symbols')
-    "let g:airline_symbols = {}
-"endif
-
-" unicode symbols
-"let g:airline_left_sep = '»'
-"let g:airline_left_sep = '▶'
-"let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
-"let g:airline_symbols.linenr = '␊'
-"let g:airline_symbols.linenr = '␤'
-"let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.branch = '⎇'
-"let g:airline_symbols.paste = 'ρ'
-"let g:airline_symbols.paste = 'Þ'
-"let g:airline_symbols.paste = '∥'
-"let g:airline_symbols.whitespace = 'Ξ'
-
-
+"-----------------------------------------------------------------
 " Use TAB to complete when typing words, else inserts TABs as usual.  Uses
 " dictionary, source files, and completor to find matching words to complete.
 
@@ -126,6 +111,9 @@ endfunction
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+
+"-----------------------------------------------------------------
+" easymotion config
 map  <Space>w <Plug>(easymotion-bd-w)
 nmap <Space>w <Plug>(easymotion-overwin-w)
 map  <Space>s <Plug>(easymotion-s)

@@ -150,6 +150,16 @@ source ~/.vim/plugins.vim
 
 
 "-----------------------------------------------------------------
+" Reload vimrc
+nnoremap <leader>r :source<Space>$MYVIMRC<cr>
+
+
+"-----------------------------------------------------------------
+" colorscheme and airline-theme
+source ~/.vim/color.vim
+
+
+"-----------------------------------------------------------------
 " Old Config [Disabled]
 "
 "set textwidth=79
