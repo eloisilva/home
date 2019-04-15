@@ -155,6 +155,31 @@ nnoremap <leader>r :source<Space>$MYVIMRC<cr>
 
 
 "-----------------------------------------------------------------
+" Paste/Numeric/RelNumeric toggle
+function! PasteMode()
+  if &number
+    set nonumber
+  else
+    set number
+  endif
+
+  if &relativenumber
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+
+  if &paste
+    set nopaste
+  else
+    set paste
+  endif
+endfunction
+
+noremap <Space>n :call PasteMode()<CR>
+
+
+"-----------------------------------------------------------------
 " colorscheme and airline-theme
 source ~/.vim/color.vim
 
