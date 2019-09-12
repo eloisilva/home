@@ -2,7 +2,7 @@
 "     File Name           :     plugins.vim
 "     Created By          :     Eloi Silva
 "     Creation Date       :     [2019-03-27 04:16]
-"     Last Modified       :     [2019-04-03 03:14]
+"     Last Modified       :     [2019-09-12 21:12]
 "     Description         :      
 "--------------------------------------------------------------------------------
 
@@ -38,18 +38,21 @@ Plug 'maralla/completor.vim', { 'do': 'pip3 install jedi' }
 Plug 'davidhalter/jedi-vim', { 'do': 'pip3 install jedi' }
 
 Plug 'ctrlpvim/ctrlp.vim'
+
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-repeat'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Plug 'sickill/vim-monokai' ### Used on MAC
 
-" Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim' ### Not used
 
 " Colorschemes
-"Plug 'fisadev/fisa-vim-colorscheme'
+"Plug 'fisadev/fisa-vim-colorscheme' ### Not used
 Plug 'rafi/awesome-vim-colorschemes'
 
 Plug 'tpope/vim-surround'
@@ -58,6 +61,10 @@ Plug 'shanzi/autoHEADER'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'tmux-plugins/vim-tmux'
+
+Plug 'raimondi/delimitmate'
+
+Plug 'benmills/vimux'
 
 call plug#end()
 
@@ -112,9 +119,33 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
-"-----------------------------------------------------------------
-" easymotion config
+"------------------------
+"  easymotion config    "
+"------------------------
 map  <Space>w <Plug>(easymotion-bd-w)
 nmap <Space>w <Plug>(easymotion-overwin-w)
 map  <Space>s <Plug>(easymotion-s)
 " nmap <Space>s <Plug>(easymotion-overwin-s)
+
+
+"------------------------
+"   autoHEADER config   "
+"------------------------
+" [Eloi Settings]
+" Enable AutoHeader Plugin
+let g:autoHEADER_auto_enable = 1
+let g:autoHEADER_default_author = "Eloi Silva"
+
+"---------------------------
+" Enable miniBufExp Plugin "
+"---------------------------
+" let g:miniBufExplMapWindowNavVim = 1
+" let g:miniBufExplMapWindowNavArrows = 1
+" let g:miniBufExplMapCTabSwitchBufs = 1
+" let g:miniBufExplModSelTarget = 1
+
+
+"---------------------------
+"     Configure Vimux      "
+"---------------------------
+nmap <leader>t :call VimuxRunCommand(expand('%:p'))<CR>

@@ -49,6 +49,12 @@ nmap <leader>W :wq<CR>
 nmap <leader>q :q<CR>
 nmap <leader>Q :q!<CR>
 
+" Reload current file
+nnoremap <leader>e :e<cr>
+
+" Search using // in Visual mode
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+
 " Insert shortcut map
 imap {<Tab> {}<Esc>i
 imap {<CR> {<Esc>o}<Esc>O
@@ -105,20 +111,6 @@ endif
 
 
 "-----------------------------------------------------------------
-" [Root Settings]
-
-" Enable AutoHeader Plugin
-let g:autoHEADER_auto_enable = 1
-let g:autoHEADER_default_author = "Eloi Silva"
-
-" Enable miniBufExp Plugin
-" let g:miniBufExplMapWindowNavVim = 1
-" let g:miniBufExplMapWindowNavArrows = 1
-" let g:miniBufExplMapCTabSwitchBufs = 1
-" let g:miniBufExplModSelTarget = 1
-
-
-"-----------------------------------------------------------------
 " Templates
 
 " Bash vim template
@@ -145,10 +137,6 @@ autocmd FileType html source ~/.vim/html.vim
 " autocmd BufRead,BufNewFile *.sh nmap <F9> :w<Esc>:!clear && bash %<CR>
 
 
-" Enable Plug
-source ~/.vim/plugins.vim
-
-
 "-----------------------------------------------------------------
 " Reload vimrc
 nnoremap <leader>r :source<Space>$MYVIMRC<cr>
@@ -159,8 +147,10 @@ nnoremap <leader>r :source<Space>$MYVIMRC<cr>
 function! PasteMode()
   if &number
     set nonumber
+    set showbreak=
   else
     set number
+    set showbreak=...
   endif
 
   if &relativenumber
@@ -183,6 +173,8 @@ noremap <Space>n :call PasteMode()<CR>
 " colorscheme and airline-theme
 source ~/.vim/color.vim
 
+" Enable Plug
+source ~/.vim/plugins.vim
 
 "-----------------------------------------------------------------
 " Old Config [Disabled]
