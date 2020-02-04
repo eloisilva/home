@@ -2,7 +2,7 @@
 "     File Name           :     plugins.vim
 "     Created By          :     Eloi Silva
 "     Creation Date       :     [2019-03-27 04:16]
-"     Last Modified       :     [2019-09-12 21:12]
+"     Last Modified       :     [2020-02-04 21:09]
 "     Description         :      
 "--------------------------------------------------------------------------------
 
@@ -65,6 +65,10 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'raimondi/delimitmate'
 
 Plug 'benmills/vimux'
+
+" Markdown plugin
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 

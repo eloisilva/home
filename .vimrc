@@ -24,6 +24,8 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+" smartindent - is enabled on MacOS
+" set smartindent
 
 " Set background
 set background=dark
