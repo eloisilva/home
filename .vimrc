@@ -150,9 +150,11 @@ function! PasteMode()
   if &number
     set nonumber
     set showbreak=
+    :ALEDisable
   else
     set number
     set showbreak=...
+    :ALEEnable
   endif
 
   if &relativenumber
