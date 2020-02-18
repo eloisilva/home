@@ -113,6 +113,16 @@ endif
 
 
 "-----------------------------------------------------------------
+" Enable Plug
+source ~/.vim/plugins.vim
+
+
+"-----------------------------------------------------------------
+" colorscheme and airline-theme
+source ~/.vim/color.vim
+
+
+"-----------------------------------------------------------------
 " Templates
 
 " Bash vim template
@@ -172,13 +182,6 @@ endfunction
 
 noremap <Space>n :call PasteMode()<CR>
 
-
-"-----------------------------------------------------------------
-" colorscheme and airline-theme
-source ~/.vim/color.vim
-
-" Enable Plug
-source ~/.vim/plugins.vim
 
 "-----------------------------------------------------------------
 " Old Config [Disabled]
