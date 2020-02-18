@@ -2,13 +2,15 @@
 "     File Name           :     plugins.vim
 "     Created By          :     Eloi Silva
 "     Creation Date       :     [2019-03-27 04:16]
-"     Last Modified       :     [2020-02-04 21:09]
+"     Last Modified       :     [2020-02-18 16:56]
 "     Description         :      
 "--------------------------------------------------------------------------------
 
 
 "-----------------------------------------------------------------
-" install vim-Plug
+"------------------------
+"   Install vim-Plug    "
+"------------------------
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
@@ -26,7 +28,9 @@ endif
 
 
 "-----------------------------------------------------------------
-" Plug list
+"------------------------
+"       Plug list       "
+"------------------------
 call plug#begin('~/.vim/plugged')
 
 Plug 'sheerun/vim-polyglot'
@@ -74,6 +78,9 @@ call plug#end()
 
 
 "-----------------------------------------------------------------
+"------------------------
+"      ALE config       "
+"------------------------
 " ALE configure
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
@@ -85,15 +92,32 @@ let g:ale_fixers = {
 \   ]
 \}
 
+"
+"-----------------------------------------------------------------
+"------------------------
+"        ALEFix         "
+"------------------------
+nnoremap <Space>f :ALEFix<cr>
+
 
 "-----------------------------------------------------------------
-" Jedi config
+"------------------------
+"      Jedi config      "
+"------------------------
 let g:jedi#completions_enabled = 1
 
 
 "-----------------------------------------------------------------
-" vim-test
+"------------------------
+"       vim-test        "
+"------------------------
+"let test#python#runner = 'unittest'
 let test#python#runner = 'pytest'
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
 
 
 "-----------------------------------------------------------------
@@ -123,6 +147,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
+"-----------------------------------------------------------------
 "------------------------
 "  easymotion config    "
 "------------------------
@@ -132,6 +157,7 @@ map  <Space>s <Plug>(easymotion-s)
 " nmap <Space>s <Plug>(easymotion-overwin-s)
 
 
+"-----------------------------------------------------------------
 "------------------------
 "   autoHEADER config   "
 "------------------------
@@ -140,6 +166,8 @@ map  <Space>s <Plug>(easymotion-s)
 let g:autoHEADER_auto_enable = 1
 let g:autoHEADER_default_author = "Eloi Silva"
 
+
+"-----------------------------------------------------------------
 "---------------------------
 " Enable miniBufExp Plugin "
 "---------------------------
@@ -149,7 +177,14 @@ let g:autoHEADER_default_author = "Eloi Silva"
 " let g:miniBufExplModSelTarget = 1
 
 
+"-----------------------------------------------------------------
 "---------------------------
 "     Configure Vimux      "
 "---------------------------
-nmap <leader>t :call VimuxRunCommand(expand('%:p'))<CR>
+nmap <leader>r :call VimuxRunCommand("clear; " . expand('%:p'))<CR><CR>
+
+" Run the current file with realpath (full path)
+"nnoremap <Space>r :call VimuxRunCommand("clear; " . expand('%:p'))<cr><cr>
+" Run the current file as a command
+"nnoremap <Space>r :call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+"nmap <leader>d :Dispatch expand('%:p')
