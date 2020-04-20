@@ -1,4 +1,9 @@
-### History configuration
+# If not running interactively, don't do anything
+case $- in
+   *i*) ;;
+     *) return;;
+esac
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
