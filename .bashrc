@@ -7,15 +7,19 @@ esac
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# HISTORY VARs
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+### Bash PATH
+PATH="$HOME/scripts/bin:$PATH"
+
+### History configuration
 export HISTFILESIZE=999999
 export HISTSIZE=999999
 export HISTCONTROL="ignoreboth:erasedups"
 export PYTHONPATH='/root/scripts/Python/Modules'
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
 
 
 #-=-=-=-=- SHELL aliases -=-=-=-=-#
