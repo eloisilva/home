@@ -62,7 +62,7 @@ tmd() {
    if tmux ls 2> /dev/null ;then
       tmux a
    else
-      tmux new -s Amazon -n aws
+      tmux new -s Maloy -n lab1
    fi
 }
 
@@ -131,7 +131,7 @@ aws() {
 }
 
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
-alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId, State.Name, PublicIpAddress]'"
+alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
 
 
 #-=-=-=-=- AWS functions -=-=-=-=-#
