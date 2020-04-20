@@ -147,6 +147,12 @@ ec2stop() {
    aws ec2 stop-instances --instance-ids $@
 }
 
+ec2ip() {
+   args=("$@")
+   aws ec2 describe-instances --filters "Name=instance-state-code,Values=16" "Name=tag:Name,Values=${args[0]}*" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text ${args[@]:1} |egrep -wo "([0-9]{1,3}\.){3}[0-9]{1,3}" --color=none || \
+   aws ec2 describe-instances --filters "Name=instance-state-code,Values=16" "Name=instance-id,Values=${args[0]}*" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text ${args[@]:1} |egrep -wo "([0-9]{1,3}\.){3}[0-9]{1,3}" --color=none
+}
+
 caseSearch() {
    CASEDIR="${CASEDIR}/notes/"
    for year in `ls -1 $CASEDIR` ;do
