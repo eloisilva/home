@@ -138,15 +138,21 @@ alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Val
 
 #-=-=-=-=- AWS functions -=-=-=-=-#
 amiSearch() {
-   aws ec2 describe-images --image-ids $@
+   args=("$@")
+   [[ ${args[0]} =~ ^"ami-" ]] || args[0]="ami-${args[0]}"
+   aws ec2 describe-images --image-ids ${args[@]}
 }
 
 ec2start() {
-   aws ec2 start-instances --instance-ids $@
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 start-instances --instance-ids ${args[@]}
 }
 
 ec2stop() {
-   aws ec2 stop-instances --instance-ids $@
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 stop-instances --instance-ids ${args[@]}
 }
 
 ec2ip() {
