@@ -120,15 +120,17 @@ alias vic='vi +":set filetype=markdown" $CASE'
 
 # AWSCLI config for virtualenv
 # Required: Add the same function to the virtualenv deactivate function
-aws() {
-   AWSCLI="${HOME}/aws-cli/"
-   if [ $# -gt 0 ] ;then
-      ${AWSCLI}/bin/aws $@
-   else
-      source ${AWSCLI}/bin/activate
-      unset aws
-   fi
-}
+if [ ! -x "$(command -v aws)" ] ;then
+   aws() {
+      AWSCLI="${HOME}/awscli/"
+      if [ $# -gt 0 ] ;then
+         ${AWSCLI}/bin/aws $@
+      else
+         source ${AWSCLI}/bin/activate
+         unset aws
+      fi
+   }
+fi
 
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
 alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
