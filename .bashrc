@@ -12,7 +12,7 @@ shopt -s histappend
 shopt -s checkwinsize
 
 ### Bash PATH
-PATH="$HOME/scripts/bin:$PATH"
+PATH="$HOME/scripts/bin:$HOME/.local/bin:$PATH"
 
 ### History configuration
 export HISTFILESIZE=999999
