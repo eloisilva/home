@@ -21,31 +21,6 @@ export HISTCONTROL="ignoreboth:erasedups"
 export PYTHONPATH='/root/scripts/Python/Modules'
 
 
-
-#-=-=-=-=- SHELL aliases -=-=-=-=-#
-# Python alias
-alias py='/usr/bin/python'
-alias py3='/usr/bin/python3'
-alias pydev='tmux new -s IDE -n py3 \; source-file ~/.tmux/pydev.conf'
-
-# PSQL Connect
-alias psql_conn='psql -U postgres'
-
-# Performance
-alias load='clear && while : ;do uptime |cut -d, -f3- ;sleep 5 ;done'
-
-# grep color
-alias grep='/usr/bin/grep --color'
-
-# Git alias
-alias ga='git add'
-alias gm='git commit -m'
-alias gs='git status'
-alias gd='git diff'
-alias gl='git log --oneline'
-alias gla='git log --stat --graph --summary --oneline'
-
-
 #-=-=-=-=- SHELL functions -=-=-=-=-#
 # ls -l simple
 lsi(){
@@ -213,3 +188,11 @@ lsc(){
    CASEDIR="${CASEDIR}/notes/"
    find $CASEDIR -iname \*$1\*
 }
+
+
+#=-=-=-= Load aliases =-=-=-=#
+if [ -d $HOME/.bash_aliases.d ] ;then
+   for f in $(ls -1 $HOME/.bash_aliases.d/*.sh) ;do
+      source $f
+   done
+fi
