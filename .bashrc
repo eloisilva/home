@@ -168,6 +168,20 @@ ec2ip() {
    echo $IP
 }
 
+# If instance not stopped return 0 else start instance and return 1
+ec2up() {
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+
+   QUERY="Reservations[].Instances[].State.[Name]"
+   if [ ! `aws ec2 describe-instances --query "$QUERY" --output text --instance-ids ${args[@]}` == "stopped" ] ;then
+      return 0
+   else
+      ec2start ${args[@]} > /dev/null 2>&1
+      return 1
+   fi
+}
+
 caseSearch() {
    CASEDIR="${CASEDIR}/notes/"
    for year in `ls -1 $CASEDIR` ;do
