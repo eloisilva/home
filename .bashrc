@@ -20,6 +20,16 @@ export HISTSIZE=999999
 export HISTCONTROL="ignoreboth:erasedups"
 export PYTHONPATH='/root/scripts/Python/Modules'
 
+# Terminal config (PS1)
+PROMPT_COMMAND="echo"
+
+get_branch ()
+{
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+PS1='\[\033[31m\]${debian_chroot:+($debian_chroot)}\h:\[\033[0m\] (\w)\n[\A]\[\033[33m\]$(get_branch)\[\033[35m\]${SSH_CLIENT:+ <SSH> }\[\033[96m\]\$ \[\033[0m\]'
+
 
 #-=-=-=-=- SHELL functions -=-=-=-=-#
 # ls -l simple
@@ -27,41 +37,9 @@ lsi(){
    ls -l --color $1 |awk '{print $1, $9, $10, $11}'
 }
 
-# Tmux New Session
-tmn() {
-   tmux new -s Lab -n $1
-}
-
-# Tmux Default
-tmd() {
-   if tmux ls 2> /dev/null ;then
-      tmux a
-   else
-      tmux new -s Maloy -n lab1
-   fi
-}
-
-# Tmux - Attach current session or create a new session
-tm() {
-   if [ -z $1 ] ;then
-      tmd
-   else
-      tmn $1
-   fi
-}
-
-# PS1 byMaloy
-get_branch ()
-{
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-#PS1='\[\033[31m\]${debian_chroot:+($debian_chroot)}\h:\[\033[0m\] (\w)\n[\A]\[\033[33m\]$(get_branch)\[\033[96m\]\$ \[\033[0m\]'
-PS1='\[\033[31m\]${debian_chroot:+($debian_chroot)}\h:\[\033[0m\] (\w)\n[\A]\[\033[33m\]$(get_branch)\[\033[35m\]${SSH_CLIENT:+ <SSH> }\[\033[96m\]\$ \[\033[0m\]'
-PROMPT_COMMAND="echo"
-
 
 #-=-=-=-=- Autocompletion -=-=-=-=-#
-# BASH Autocomplete
+# BASH autocomplete
 if [ -f /etc/bash_completion ] ;then
    source /etc/bash_completion
 elif [ -f /usr/local/etc/bash_completion ] ;then
@@ -72,7 +50,7 @@ if [ -e "${HOME}/.iterm2_shell_integration.bash" ] ;then
    source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
-# Autocomplete for awscli
+# AWSCLI autocomplete
 complete -C aws_completer aws
 
 
