@@ -59,52 +59,6 @@ complete -C aws_completer aws
 export TERM='screen-256color'
 
 
-#-=-=-=-=- AWS alias -=-=-=-=-#
-# Workdir
-CASEDIR="${HOME}/Documents/cases/"
-
-# Load AWS configuration file
-source ${HOME}/.aws/activate.sh
-
-# Workdir aliases
-alias activate_case="source ${CASEDIR}/current.sh"
-alias cdc='cd $CaseDIR'
-alias vic='vi +":set filetype=markdown" $CASE'
-
-
-caseSearch() {
-   CASEDIR="${CASEDIR}/notes/"
-   for year in `ls -1 $CASEDIR` ;do
-      for d in `ls -1 $CASEDIR/$year |grep .` ;do
-         ( cd $CASEDIR/$year/$d ; git log --oneline |grep -i $1 )
-      done
-   done
-}
-
-grepcf(){
-   CASEDIR="${CASEDIR}/notes/"
-   if [ ! -z $2 ] ;then
-      grep -ril $1 $2
-   else
-      grep -ril $1 $CASEDIR
-   fi
-}
-
-grepc(){
-   CASEDIR="${CASEDIR}/notes/"
-   if [ ! -z $2 ] ;then
-      grep -ri $1 $2
-   else
-      grep -ri $1 $CASEDIR
-   fi
-}
-
-lsc(){
-   CASEDIR="${CASEDIR}/notes/"
-   find $CASEDIR -iname \*$1\*
-}
-
-
 #=-=-=-= Load aliases =-=-=-=#
 if [ -d $HOME/.bash_aliases.d ] ;then
    for f in $(ls -1 $HOME/.bash_aliases.d/*.sh) ;do
