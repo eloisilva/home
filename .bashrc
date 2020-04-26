@@ -135,6 +135,9 @@ fi
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
 alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
 
+# List instance id
+alias ec2id="aws ec2 describe-network-interfaces --filters Name=addresses.association.public-ip,Values=$1 --query NetworkInterfaces[].Attachment.InstanceId --output text"
+
 
 #-=-=-=-=- AWS functions -=-=-=-=-#
 amiSearch() {
