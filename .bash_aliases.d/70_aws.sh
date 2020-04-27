@@ -3,7 +3,7 @@
 #     File Name           :     awscli.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 16:40]
-#     Last Modified       :     [2020-04-26 17:33]
+#     Last Modified       :     [2020-04-27 16:09]
 #     Description         :     BASH AWSCLI aliases & functions
 #################################################################################
 
@@ -43,6 +43,13 @@ ec2stop() {
    args=("$@")
    [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
    aws ec2 stop-instances --instance-ids ${args[@]}
+}
+
+
+ec2terminate() {
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 terminate-instances --instance-ids ${args[@]}
 }
 
 # List instance IP address (if its running)
