@@ -1,13 +1,11 @@
-"--------------------------------------------------------------------------------
-"     File Name           :     plugins.vim
-"     Created By          :     Eloi Silva
-"     Creation Date       :     [2019-03-27 04:16]
-"     Last Modified       :     [2020-02-18 16:56]
-"     Description         :      
-"--------------------------------------------------------------------------------
+"---------------------------------------------------
+"     File Name           :     plugins.vim        "
+"     Created By          :     Eloi Silva         "
+"     Creation Date       :     [2019-03-27 04:16] "
+"     Last Modified       :     [2020-05-01 02:02] "
+"     Description         :                        "
+"--------------------------------------------------"
 
-
-"-----------------------------------------------------------------
 "------------------------
 "   Install vim-Plug    "
 "------------------------
@@ -27,42 +25,101 @@ if vim_plug_just_installed
 endif
 
 
-"-----------------------------------------------------------------
+"------------------------
 "------------------------
 "       Plug list       "
 "------------------------
 call plug#begin('~/.vim/plugged')
 
-Plug 'sheerun/vim-polyglot'
-
-Plug 'w0rp/ale', { 'do': 'pip3 install flake8 isort yapf' }
-
-Plug 'maralla/completor.vim', { 'do': 'pip3 install jedi' }
-
-Plug 'davidhalter/jedi-vim', { 'do': 'pip3 install jedi' }
-
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
-
-Plug 'janko-m/vim-test'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-repeat'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'sickill/vim-monokai' ### Used on MAC
-
-" Plug 'edkolev/tmuxline.vim' ### Not used
-
-" Colorschemes
-"Plug 'fisadev/fisa-vim-colorscheme' ### Not used
-Plug 'rafi/awesome-vim-colorschemes'
-
+"=-=-= Core plugins =-=-=
+" Make easy to add/change/remove surround (maps: ysiw -- dsiw -- csiw)
 Plug 'tpope/vim-surround'
+
+" Make repeat extensible
+Plug 'tpope/vim-repeat'
+ 
+" Enable easy motions (maps: <space>w -- <space>s)
+Plug 'easymotion/vim-easymotion'
+
+" Undotree plugin (map: <leader>u)
+Plug 'mbbill/undotree'
+
+" Automatic add headers to new files
 Plug 'shanzi/autoHEADER'
 
-Plug 'easymotion/vim-easymotion'
+" Grep - (map: <leader>rg)
+Plug 'jremmen/vim-ripgrep'
+
+" Fuzzy file, buffer, etc finder for Vim (map: ctrl-p)
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
+
+" Auto add delimiters like ],},),',",etc.
+Plug 'raimondi/delimitmate'
+ 
+
+"=-=-= GIT plugins =-=-=
+Plug 'tpope/vim-fugitive'
+
+
+"=-=-= Code Languages =-=-=
+" Language Server Protocol (LSP)
+Plug 'w0rp/ale', { 'do': 'pip3 install flake8 isort yapf' }
+
+" A collection of language packs
+Plug 'sheerun/vim-polyglot'
+
+" C++ language
+Plug 'lyuts/vim-rtags'
+
+" typescript/javascript
+Plug 'leafgarland/typescript-vim'
+
+" Python
+Plug 'davidhalter/jedi-vim', { 'do': 'pip3 install jedi' }
+
+" Allow run program tests inside vim
+Plug 'janko-m/vim-test'
+
+" Run test program in dispatch (integratino with vim-test plugin)
+Plug 'tpope/vim-dispatch'
+
+" Easily interact with tmux from vim (integration with vim-test plugin)
+Plug 'benmills/vimux'
+
+" .tmux.conf integration like syntax highlighting, commentstring, etc.
+Plug 'tmux-plugins/vim-tmux'
+
+" Markdown plugin
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
+
+"=-=-= Autocomplete plugins =-=-=
+" Code completion
+Plug 'maralla/completor.vim', { 'do': 'pip3 install jedi' }
+
+
+"=-=-= Colorschemes plugins =-=-=
+" Vim airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Colorschemes gruvbox
+Plug 'morhetz/gruvbox'
+
+" Colorschemes molokai
+"Plug 'rafi/awesome-vim-colorschemes'
+
+"=-=-= Disabled plugins =-=-=
+" File manager (disabled)
+"Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'sickill/vim-monokai' ### Used on MAC
+"Plug 'edkolev/tmuxline.vim' ### Not used
+"Plug 'fisadev/fisa-vim-colorscheme' ### Not used
+
+call plug#end()
+
 
 Plug 'tmux-plugins/vim-tmux'
 
