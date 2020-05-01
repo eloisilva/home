@@ -121,20 +121,52 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 
 
-Plug 'tmux-plugins/vim-tmux'
-
-Plug 'raimondi/delimitmate'
-
-Plug 'benmills/vimux'
-
-" Markdown plugin
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
-call plug#end()
+"------------------------
+"  easymotion config    "
+"------------------------
+map  <Space>w <Plug>(easymotion-bd-w)
+nmap <Space>w <Plug>(easymotion-overwin-w)
+map  <Space>s <Plug>(easymotion-s)
+" nmap <Space>s <Plug>(easymotion-overwin-s)
 
 
-"-----------------------------------------------------------------
+"------------------------
+"       undotree        "
+"------------------------
+nnoremap <leader>u :UndotreeShow<CR>
+
+
+"------------------------
+"   autoHEADER config   "
+"------------------------
+" [Eloi Settings]
+" Enable AutoHeader Plugin
+let g:autoHEADER_auto_enable = 1
+let g:autoHEADER_default_author = "Eloi Silva"
+
+
+"------------------------
+"        RipGrep        "
+"------------------------
+if executable('rg')
+  let g:rg_derive_root='true'
+endif
+
+nnoremap <leader>rg :Rg<SPACE>
+
+
+"------------------------
+"         ctrlp         "
+"------------------------
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_use_caching = 0
+
+" Easy bindings for its various modes
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
+
+
 "------------------------
 "      ALE config       "
 "------------------------
@@ -149,22 +181,18 @@ let g:ale_fixers = {
 \   ]
 \}
 
-"
-"-----------------------------------------------------------------
-"------------------------
-"        ALEFix         "
-"------------------------
 nnoremap <Space>f :ALEFix<cr>
 
 
-"-----------------------------------------------------------------
 "------------------------
 "      Jedi config      "
 "------------------------
 let g:jedi#completions_enabled = 1
+" When you start typing `from module.name<space>` jedi-vim automatically
+" adds the "import" statement and displays the autocomplete popup.
+let g:jedi#smart_auto_mappings = 1
 
 
-"-----------------------------------------------------------------
 "------------------------
 "       vim-test        "
 "------------------------
@@ -177,13 +205,10 @@ nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
 
-"-----------------------------------------------------------------
-" Use TAB to complete when typing words, else inserts TABs as usual.  Uses
-" dictionary, source files, and completor to find matching words to complete.
-
-" Note: usual completion is on <C-n> but more trouble to press all the time.
-" Never type the same word twice and maybe learn a new spellings!
-" Use the Linux dictionary when spelling is in doubt.
+"------------------------
+"       completor       "
+"------------------------
+" Use Tab to select completion
 function! Tab_Or_Complete() abort
   " If completor is already open the `tab` cycles through suggested completions.
   if pumvisible()
@@ -203,28 +228,48 @@ endfunction
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-
-"-----------------------------------------------------------------
-"------------------------
-"  easymotion config    "
-"------------------------
-map  <Space>w <Plug>(easymotion-bd-w)
-nmap <Space>w <Plug>(easymotion-overwin-w)
-map  <Space>s <Plug>(easymotion-s)
-" nmap <Space>s <Plug>(easymotion-overwin-s)
-
-
-"-----------------------------------------------------------------
-"------------------------
-"   autoHEADER config   "
-"------------------------
-" [Eloi Settings]
-" Enable AutoHeader Plugin
-let g:autoHEADER_auto_enable = 1
-let g:autoHEADER_default_author = "Eloi Silva"
+" Jump to definition completor#do('definition')
+noremap <silent> <leader>d :call completor#do('definition')<CR>
+" Show documentation completor#do('doc')
+noremap <silent> <leader>c :call completor#do('doc')<CR>
+" Format code completor#do('format')
+noremap <silent> <leader>f :call completor#do('format')<CR>
+" Hover info (lsp hover) completor#do('hover')
+noremap <silent> <leader>s :call completor#do('hover')<CR>
 
 
-"-----------------------------------------------------------------
+"---------------------------
+"     Configure Vimux      "
+"---------------------------
+nmap <space>r :call VimuxRunCommand("clear; " . expand('%:p'))<CR><CR>
+
+" Run the current file with realpath (full path)
+"nnoremap <Space>r :call VimuxRunCommand("clear; " . expand('%:p'))<cr><cr>
+" Run the current file as a command
+"nnoremap <Space>r :call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+"nmap <leader>d :Dispatch expand('%:p')
+
+
+"---------------------------
+"      Airline theme       "
+"---------------------------
+let g:airline_theme='molokai'
+
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+
+
+"-----------------------
+"     colorscheme      "
+"-----------------------
+"colorscheme molokai
+colorscheme gruvbox
+
+
 "---------------------------
 " Enable miniBufExp Plugin "
 "---------------------------
@@ -232,16 +277,3 @@ let g:autoHEADER_default_author = "Eloi Silva"
 " let g:miniBufExplMapWindowNavArrows = 1
 " let g:miniBufExplMapCTabSwitchBufs = 1
 " let g:miniBufExplModSelTarget = 1
-
-
-"-----------------------------------------------------------------
-"---------------------------
-"     Configure Vimux      "
-"---------------------------
-nmap <leader>r :call VimuxRunCommand("clear; " . expand('%:p'))<CR><CR>
-
-" Run the current file with realpath (full path)
-"nnoremap <Space>r :call VimuxRunCommand("clear; " . expand('%:p'))<cr><cr>
-" Run the current file as a command
-"nnoremap <Space>r :call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
-"nmap <leader>d :Dispatch expand('%:p')
