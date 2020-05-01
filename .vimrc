@@ -82,6 +82,10 @@ imap "<CR> "<Esc>o"<Esc>O
 imap (<Tab> ()<Esc>i
 imap (<CR> (<Esc>o)<Esc>O
 
+" In Visual mode move lines up (J) and down (K)
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " History
 set history=500
 set hidden
