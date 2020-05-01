@@ -1,6 +1,7 @@
 "-----------------------------------------------------------------
 " Colorscheme
-colorscheme molokai
+"colorscheme molokai
+
 "colorscheme PaperColor
 "colorscheme 256_noir
 "colorscheme abstract
@@ -73,7 +74,8 @@ colorscheme molokai
 
 "-----------------------------------------------------------------
 " Airline theme
-let g:airline_theme='molokai'
+"let g:airline_theme='molokai'
+
 "let g:airline_theme='raven'
 "-let g:airline_theme='alduin'
 "let g:airline_theme='angr'

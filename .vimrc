@@ -112,18 +112,21 @@ if has("autocmd")
 endif
 
 
-"-----------------------------------------------------------------
+"-------------------------
+"-------------------------
+"      Load section      "
+"-------------------------
 " Enable Plug
 source ~/.vim/plugins.vim
 
-
-"-----------------------------------------------------------------
-" colorscheme and airline-theme
-source ~/.vim/color.vim
+" colorscheme and airline-theme (Moved to plugins.vim file)
+"source ~/.vim/color.vim
 
 
-"-----------------------------------------------------------------
-" Templates
+"-------------------------
+"-------------------------
+"       Templates        "
+"-------------------------
 
 " Bash vim template
 autocmd FileType sh source ~/.vim/sh.vim
