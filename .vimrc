@@ -236,12 +236,28 @@ endfunction
     "return statusline
 "endfunction
 
-function! PyMain()
-    normal Go
-    let currline = line(".")
-    call append(currline, "def main():")
-    call append(currline+1, "    pass")
-    call append(currline+2, "")
-    call append(currline+3, "if __name__ == '__main__':")
-    call append(currline+4, "    main()")
-endfunction
+" Status line config
+" set statusline=%!MyStatusLine()
+
+
+"-------------------------
+"-------------------------
+"        Try later       "
+"-------------------------
+
+" Give more space for displaying messages.
+"set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+"set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+"set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+"set signcolumn=yes
+
+"set colorcolumn=80
+"highlight ColorColumn ctermbg=0 guibg=lightgray
