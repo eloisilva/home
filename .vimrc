@@ -11,6 +11,21 @@ set encoding=utf8
 " Backspace map
 set backspace=indent,eol,start
 
+" Remove bells
+set noerrorbells
+
+" Disable swapfiles and backups
+set noswapfile
+set nobackup
+set nowritebackup
+
+" Enable undodir
+if !isdirectory($HOME."/.vim/undodir")
+  call mkdir($HOME."/.vim/undodir", "", 0700)
+endif
+set undodir=~/.vim/undodir
+set undofile
+
 " Enable number and relative number
 set nu
 set relativenumber
