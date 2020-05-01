@@ -111,6 +111,12 @@ set path+=**
 set wildmenu
 set showmatch
 
+" Open a buffer in a vertical split on the left side
+cabbrev vbr vert sb
+
+" Open a buffer in a vertical split on the right side
+cabbrev vb vert belowright sb
+
 " Return to the same file line as before
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
