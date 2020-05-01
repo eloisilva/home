@@ -1,4 +1,6 @@
-" [Default Settings]
+"---------------------------
+"    [Default Settings]    "
+"---------------------------
 
 " Set the current millenium
 set nocompatible
@@ -15,9 +17,6 @@ set relativenumber
 
 " Syntax and Background configuration
 syntax on
-
-" Status line config
-" set statusline=%!MyStatusLine()
 
 " Set search behave
 set ignorecase 
@@ -53,6 +52,9 @@ nmap <leader>Q :q!<CR>
 
 " Reload current file
 nnoremap <leader>e :e<cr>
+
+" Reload vimrc
+nnoremap <leader>r :source<Space>$MYVIMRC<cr>
 
 " Search using // in Visual mode
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
@@ -138,27 +140,16 @@ autocmd FileType sh source ~/.vim/sh.vim
 autocmd FileType html source ~/.vim/html.vim
 
 
-"-----------------------------------------------------------------
-" Auto Run
-
-" Auto save and Exec Python Script
-" autocmd FileType python map <F9> :w<Esc>:!clear && python %<CR>
-
 " Python Auto-Complete command
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 
-" Auto save and Exec Shell Script
-" autocmd BufRead,BufNewFile *.sh nmap <F9> :w<Esc>:!clear && bash %<CR>
+"-------------------------
+"-------------------------
+"       Functions        "
+"-------------------------
 
-
-"-----------------------------------------------------------------
-" Reload vimrc
-nnoremap <leader>r :source<Space>$MYVIMRC<cr>
-
-
-"-----------------------------------------------------------------
-" Paste/Numeric/RelNumeric toggle
+" Enable/Disable Paste mode (number/ALE/linebreak)
 function! PasteMode()
   if &number
     set nonumber
@@ -186,39 +177,39 @@ endfunction
 noremap <Space>n :call PasteMode()<CR>
 
 
-"-----------------------------------------------------------------
-" Old Config [Disabled]
-"
-"set textwidth=79
-"set mouse=a
-"
-"map T :TaskList<CR>
-"map P :TlistToggle<CR>
-
-
-"-----------------------------------------------------------------
-" Functions
-
-function! MyStatusLine()
-    let statusline = ""
-    " Filename (F -> full, f -> relative)
-    let statusline .= "%f"
-    " Buffer flags
-    let statusline .= "%( %h%1*%m%*%r%w%) "
-    " File format and type
-    let statusline .= "(%{&ff}%(\/%Y%))"
-    " Left/right separator
-    let statusline .= "%="
-    " Line & column
-    let statusline .= "(%l,%c%V) "
-    " Character under cursor (decimal)
-    let statusline .= "%03.3b "
-    " Character under cursor (hexadecimal)
-    let statusline .= "0x%02.2B "
-    " File progress
-    let statusline .= "| %P/%L"
-    return statusline
+" Create python main to run when not imported
+function! PyMain()
+    normal Go
+    let currline = line(".")
+    call append(currline, "def main():")
+    call append(currline+1, "    pass")
+    call append(currline+2, "")
+    call append(currline+3, "if __name__ == '__main__':")
+    call append(currline+4, "    main()")
 endfunction
+
+
+" Create a custom StatusLine (Disabled)
+"function! MyStatusLine()
+    "let statusline = ""
+    " Filename (F -> full, f -> relative)
+    "let statusline .= "%f"
+    " Buffer flags
+    "let statusline .= "%( %h%1*%m%*%r%w%) "
+    " File format and type
+    "let statusline .= "(%{&ff}%(\/%Y%))"
+    " Left/right separator
+    "let statusline .= "%="
+    " Line & column
+    "let statusline .= "(%l,%c%V) "
+    " Character under cursor (decimal)
+    "let statusline .= "%03.3b "
+    " Character under cursor (hexadecimal)
+    "let statusline .= "0x%02.2B "
+    " File progress
+    "let statusline .= "| %P/%L"
+    "return statusline
+"endfunction
 
 function! PyMain()
     normal Go
