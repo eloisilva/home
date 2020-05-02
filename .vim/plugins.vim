@@ -2,7 +2,7 @@
 "     File Name           :     plugins.vim        "
 "     Created By          :     Eloi Silva         "
 "     Creation Date       :     [2019-03-27 04:16] "
-"     Last Modified       :     [2020-05-02 17:30] "
+"     Last Modified       :     [2020-05-02 20:23] "
 "     Description         :                        "
 "--------------------------------------------------"
 
@@ -53,6 +53,9 @@ Plug 'jremmen/vim-ripgrep'
 " Fuzzy file, buffer, etc finder for Vim (map: ctrl-p)
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'kien/ctrlp.vim'
+
+" Vim plugin to list, select and switch between buffers
+Plug 'jeetsukumaran/vim-buffergator'
 
 " Auto add delimiters like ],},),',",etc.
 Plug 'raimondi/delimitmate'
@@ -171,6 +174,16 @@ let g:ctrlp_use_caching = 0
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
+
+
+"------------------------
+"      Buffergator      "
+"------------------------
+" I want my own keymappings...
+let g:buffergator_suppress_keymaps = 1
+
+" View the entire list of buffers open
+nmap <leader>bl :BuffergatorOpen<cr>
 
 
 "------------------------
