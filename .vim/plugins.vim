@@ -97,6 +97,9 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+" CSS color - show the css colors when coding
+Plug 'ap/vim-css-color'
+
 
 "=-=-= Autocomplete plugins =-=-=
 " Code completion
