@@ -111,12 +111,6 @@ set path+=**
 set wildmenu
 set showmatch
 
-" Open a buffer in a vertical split on the left side
-cabbrev vbr vert sb
-
-" Open a buffer in a vertical split on the right side
-cabbrev vb vert belowright sb
-
 " Return to the same file line as before
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -137,6 +131,34 @@ runtime! debian.vim
 if has("autocmd")
   filetype plugin indent on
 endif
+
+
+"------------------------
+"------------------------
+"       [Buffers]       "
+"------------------------
+" Open a buffer in a vertical split on the left side
+cabbrev vbr vert sb
+
+" Open a buffer in a vertical split on the right side
+cabbrev vb vert belowright sb
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Show all open buffers and their status (replaced by plugin Buffergator)
+nmap <leader>b :ls<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Open new empty buffer
+nmap <leader>bn :enew<cr>
+
 
 
 "-------------------------
