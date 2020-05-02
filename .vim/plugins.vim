@@ -2,7 +2,7 @@
 "     File Name           :     plugins.vim        "
 "     Created By          :     Eloi Silva         "
 "     Creation Date       :     [2019-03-27 04:16] "
-"     Last Modified       :     [2020-05-01 02:02] "
+"     Last Modified       :     [2020-05-02 17:30] "
 "     Description         :                        "
 "--------------------------------------------------"
 
@@ -56,6 +56,9 @@ Plug 'kien/ctrlp.vim'
 
 " Auto add delimiters like ],},),',",etc.
 Plug 'raimondi/delimitmate'
+
+" Personal wiki for vim
+Plug 'vimwiki/vimwiki'
  
 
 "=-=-= GIT plugins =-=-=
@@ -165,6 +168,25 @@ let g:ctrlp_use_caching = 0
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
+
+
+"------------------------
+"        vimwiki        "
+"------------------------
+let g:vimwiki_list = [{'path': '~/Documents/wiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+" Default maps
+"<Leader>ww -- Open default wiki index file.
+"<Leader>wt -- Open default wiki index file in a new tab.
+"<Leader>ws -- Select and open wiki index file.
+"<Leader>wd -- Delete wiki file you are in.
+"<Leader>wr -- Rename wiki file you are in.
+"<Enter> -- Follow/Create wiki link
+"<Shift-Enter> -- Split and follow/create wiki link
+"<Ctrl-Enter> -- Vertical split and follow/create wiki link
+"<Backspace> -- Go back to parent(previous) wiki link
+"<Tab> -- Find next wiki link
+"<Shift-Tab> -- Find previous wiki link
 
 
 "------------------------
