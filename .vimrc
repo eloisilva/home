@@ -65,6 +65,12 @@ nmap <leader>W :wq<CR>
 nmap <leader>q :q<CR>
 nmap <leader>Q :q!<CR>
 
+" Move between splits using ctrl-l, ctrl-h, ctrl-j and ctrl-k
+nmap <buffer> <C-l> <C-w>l
+nmap <buffer> <C-h> <C-w>h
+nmap <buffer> <C-j> <C-w>j
+nmap <buffer> <C-k> <C-w>k
+
 " Reload current file
 nnoremap <leader>e :e<cr>
 
@@ -158,7 +164,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Open new empty buffer
 nmap <leader>bn :enew<cr>
-
 
 
 "-------------------------
