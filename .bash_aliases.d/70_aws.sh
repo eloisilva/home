@@ -3,7 +3,7 @@
 #     File Name           :     awscli.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 16:40]
-#     Last Modified       :     [2020-04-27 16:09]
+#     Last Modified       :     [2020-04-27 20:08]
 #     Description         :     BASH AWSCLI aliases & functions
 #################################################################################
 
@@ -77,10 +77,11 @@ ec2up() {
    fi
 }
 
+# List instance id
+ec2id(){
+   aws ec2 describe-network-interfaces --filters Name=addresses.association.public-ip,Values=$1 --query NetworkInterfaces[].Attachment.InstanceId --output text
+}
 
 #=-=-=-= AWSCLI Aliases =-=-=-=#
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
 alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
-
-# List instance id
-alias ec2id="aws ec2 describe-network-interfaces --filters Name=addresses.association.public-ip,Values=$1 --query NetworkInterfaces[].Attachment.InstanceId --output text"
