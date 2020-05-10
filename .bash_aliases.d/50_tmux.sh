@@ -3,7 +3,7 @@
 #     File Name           :     tmux.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 17:12]
-#     Last Modified       :     [2020-04-26 17:21]
+#     Last Modified       :     [2020-04-27 19:20]
 #     Description         :     Bash TMUX aliases & functions
 #################################################################################
 
@@ -22,7 +22,7 @@ tmd() {
    if tmux ls 2> /dev/null ;then
       tmux a
    else
-      tmux new -s $TMUX_DEFSESSION -n lab1
+      tmux new -s $TMUX_DEFAULT_SESSION -n lab1
    fi
 }
 
