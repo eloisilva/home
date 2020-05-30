@@ -2,7 +2,7 @@
 "     File Name           :     plugins.vim        "
 "     Created By          :     Eloi Silva         "
 "     Creation Date       :     [2019-03-27 04:16] "
-"     Last Modified       :     [2020-05-02 20:23] "
+"     Last Modified       :     [2020-05-30 17:20] "
 "     Description         :                        "
 "--------------------------------------------------"
 
@@ -191,6 +191,8 @@ nmap <leader>bl :BuffergatorOpen<cr>
 "------------------------
 let g:vimwiki_list = [{'path': '~/Documents/wiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
+
 " Default maps
 "<Leader>ww -- Open default wiki index file.
 "<Leader>wt -- Open default wiki index file in a new tab.
