@@ -33,6 +33,10 @@ set relativenumber
 " Syntax and Background configuration
 syntax on
 
+" Set column line at chr 80
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgray
+
 " Set search behave
 set ignorecase 
 set smartcase
@@ -80,6 +84,10 @@ nnoremap <leader>r :source<Space>$MYVIMRC<cr>
 " Search using // in Visual mode
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
+" Configure spell checking
+nmap <silent> <leader>p :set spell!<CR>
+set spelllang=en_us
+
 " Insert shortcut map
 imap {<Tab> {}<Esc>i
 imap {<CR> {<Esc>o}<Esc>O
@@ -101,10 +109,9 @@ set laststatus=2
 set ruler
 set showcmd
 
-" show list bar
-"set list
-set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+"set list listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 "set listchars=trail:.,tab:>-,extends:>,precedes:<,nbsp:¬
+set list listchars=tab:»\ ,trail:·
 
 " Line break (wrap)
 set wrap
@@ -190,7 +197,6 @@ autocmd FileType sh source ~/.vim/sh.vim
 
 " HTML vim template
 autocmd FileType html source ~/.vim/html.vim
-
 
 " Python Auto-Complete command
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -346,6 +352,3 @@ let g:NetrwIsOpen=0
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 "set signcolumn=yes
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgray
