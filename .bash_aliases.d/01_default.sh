@@ -3,7 +3,7 @@
 #     File Name           :     default.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 16:40]
-#     Last Modified       :     [2020-05-30 17:24]
+#     Last Modified       :     [2020-06-13 01:27]
 #     Description         :     Bash default aliases
 #################################################################################
 
@@ -17,7 +17,7 @@ alias ga='git add'
 alias gm='git commit -m'
 alias gs='git status'
 alias gd='git diff'
-alias gl='git log --oneline --graph'
+alias gl='git log --oneline --graph --all'
 alias gla='git log --stat --graph --summary --oneline --all'
 
 
