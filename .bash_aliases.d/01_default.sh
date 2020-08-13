@@ -3,7 +3,7 @@
 #     File Name           :     default.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 16:40]
-#     Last Modified       :     [2020-06-13 01:27]
+#     Last Modified       :     [2020-08-13 21:44]
 #     Description         :     Bash default aliases
 #################################################################################
 
@@ -56,4 +56,17 @@ alias al='ec2 63.34.47.245'
 # Return BGP AS Number for IP address
 ans(){
    whois -h whois.cymru.com "-v $1"
+}
+
+killp(){
+   [ -z $1 ] && echo "Use: killp {tcp_port_number}" && return 1
+   PID=$(lsof -nPiTCP:$1 -sTCP:LISTEN -t)
+   if [[ ! -z $PID ]] ;then
+      kill $PID && \
+         echo "[OK] - Killed: $PID" || \
+         echo "[Fail] - Failled to kill PID(s) $PID"
+   else
+      echo "[ERR] - No PID found for TCP PORT $1"
+   fi
+   unset PID
 }
