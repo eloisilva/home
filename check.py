@@ -3,7 +3,7 @@
 #     File Name           :     check.py
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-06-09 01:15]
-#     Last Modified       :     [2020-06-09 02:25]
+#     Last Modified       :     [2020-08-30 13:14]
 #     Description         :     Check if files was updated on home directory
 ###############################################################################
 
@@ -15,7 +15,7 @@ user_home = os.getenv('HOME')
 files = dict(
     vim=['./.vimrc', './.vim/plugins.vim'],
     bash=['./.bashrc', './.inputrc'],
-    bash_aliases=['./.bash_aliases.d/01_default.sh', './.bash_aliases.d/50_tmux.sh', './.bash_aliases.d/70_aws.sh', './.bash_aliases.d/71_workdir.sh'],
+    bash_aliases=['./.bash_aliases.d/01_default.sh', './.bash_aliases.d/50_tmux.sh', './.bash_aliases.d/70_aws.sh', './.bash_aliases.d/72_wiki.sh', './.bash_aliases.d/71_workdir.sh', './.bash_aliases.d/80_ssh.sh', './.bash_aliases.d/81_git.sh'],
     tmux=['./.tmux.conf', './.tmux/tmux-color.conf'],
     config=['./.config/flake8'],
     ssh=['./.ssh/config']
