@@ -3,7 +3,6 @@
 #     File Name           :     tmux.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 17:12]
-#     Last Modified       :     [2020-04-27 19:20]
 #     Description         :     Bash TMUX aliases & functions
 #################################################################################
 

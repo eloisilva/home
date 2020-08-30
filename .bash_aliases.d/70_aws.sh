@@ -3,7 +3,6 @@
 #     File Name           :     awscli.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 16:40]
-#     Last Modified       :     [2020-04-27 20:08]
 #     Description         :     BASH AWSCLI aliases & functions
 #################################################################################
 

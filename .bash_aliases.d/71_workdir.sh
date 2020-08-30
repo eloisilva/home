@@ -3,7 +3,6 @@
 #     File Name           :     workdir.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 18:20]
-#     Last Modified       :     [2020-04-27 16:39]
 #     Description         :     Workdir aliases & functions
 #################################################################################
 

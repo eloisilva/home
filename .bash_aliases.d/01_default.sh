@@ -3,7 +3,6 @@
 #     File Name           :     default.sh
 #     Created By          :     Eloi Silva
 #     Creation Date       :     [2020-04-26 16:40]
-#     Last Modified       :     [2020-08-13 21:44]
 #     Description         :     Bash default aliases
 #################################################################################
 
