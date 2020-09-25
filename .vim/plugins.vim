@@ -2,7 +2,6 @@
 "     File Name           :     plugins.vim        "
 "     Created By          :     Eloi Silva         "
 "     Creation Date       :     [2019-03-27 04:16] "
-"     Last Modified       :     [2020-05-30 17:20] "
 "     Description         :                        "
 "--------------------------------------------------"
 
@@ -60,7 +59,7 @@ Plug 'jeetsukumaran/vim-buffergator'
 " Auto add delimiters like ],},),',",etc.
 Plug 'raimondi/delimitmate'
 
-" Personal wiki for vim
+" Personal wiki for vim (branch 64c9f3d)
 Plug 'vimwiki/vimwiki'
  
 
@@ -99,6 +98,9 @@ Plug 'tmux-plugins/vim-tmux'
 " Markdown plugin
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+
+" Markdown table
+Plug 'dhruvasagar/vim-table-mode'
 
 " CSS color - show the css colors when coding
 Plug 'ap/vim-css-color'
