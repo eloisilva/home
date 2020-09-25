@@ -5,9 +5,16 @@
 #     Description         :     Bash TMUX aliases & functions
 #################################################################################
 
+#=-=-=-= Wiki Variables =-=-=-=#
+
 # Default browser binary
 BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox --new-tab"
 
+# VimWiki home
+VIMWIKI_HOME="~/Documents/wiki"
+
+
+#=-=-=-= Wiki Functions =-=-=-=#
 
 # Create SSH tunnel and open wiki
 wiki(){
@@ -30,3 +37,9 @@ dwiki(){
    $BROWSER https://localhost:8443
    unset IP
 }
+
+
+#=-=-=-= Wiki  Aliases =-=-=-=#
+
+# Change directory to VimWiki home
+alias cdw="cd $VIMWIKI_HOME"
