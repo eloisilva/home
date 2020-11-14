@@ -44,11 +44,32 @@ ec2stop() {
    aws ec2 stop-instances --instance-ids ${args[@]}
 }
 
-
+# Terminate Instance
 ec2terminate() {
    args=("$@")
    [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
    aws ec2 terminate-instances --instance-ids ${args[@]}
+}
+
+ec2run() {
+   args=("$@")
+   SG="sg-0590e441933a35413"
+   INSTANCETYPE="t3.medium"
+   SSHKEY="Dublin-eu-west-1"
+   [[ ${args[0]} =~ ^"ami-" ]] || args[0]="ami-${args[0]}"
+   aws ec2 run-instances --instance-type $INSTANCETYPE --security-group-ids $SG --key-name $SSHKEY --image-id ${args[@]}
+   # Usage: ec2run ami-xxx --user-data file://UserDataScript.sh --region eu-west-1
+}
+
+ec2tag(){
+   args=("$@")
+   if [ ${#args[*]} -lt 2 ] ;then
+      echo "Use: ec2tag tagname:tagvalue instance_id1 instance_id2"
+      return 1
+   fi
+   read NAME VALUE <<< `echo ${args[0]} |tr ':' ' '`
+   aws ec2 create-tags --tags "Key=$NAME,Value=$VALUE" --resources ${args[@]:1}
+   # Usage: ec2tag Name:Debian10 i-xxx --region eu-west-1
 }
 
 # List instance IP address (if its running)
@@ -81,6 +102,7 @@ ec2id(){
    aws ec2 describe-network-interfaces --filters Name=addresses.association.public-ip,Values=$1 --query NetworkInterfaces[].Attachment.InstanceId --output text
 }
 
+
 #=-=-=-= AWSCLI Aliases =-=-=-=#
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
-alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
+#alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
