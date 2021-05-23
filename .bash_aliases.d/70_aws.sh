@@ -102,7 +102,21 @@ ec2id(){
    aws ec2 describe-network-interfaces --filters Name=addresses.association.public-ip,Values=$1 --query NetworkInterfaces[].Attachment.InstanceId --output text
 }
 
+# Attach IAM Instance Profile to instance
+ec2profile(){
+   args=("$@")
+   [[ ${args[1]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 associate-iam-instance-profile --iam-instance-profile "Name=${args[0]}" --instance-id ${args[@]:1}
+   # Usage: ec2profile SSMCoreOnly i-xxx
+}
+
+ec2list-tags(){
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 describe-instances --query "Reservations[].Instances[].[InstanceId,Tags]" --instance-ids ${args[@]}
+}
 
 #=-=-=-= AWSCLI Aliases =-=-=-=#
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
 #alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
+alias ec2list-profile='aws iam list-instance-profiles --query "InstanceProfiles[].Roles[].RoleName"'

@@ -6,14 +6,25 @@
 #     Description         :     SSH aliases
 #################################################################################
 
+#=-=-=-= SSH Function =-=-=-=#
+function connect_ssh() {
+   SSHBIN="/usr/bin/ssh"
+   sshtimewait=3
+   args=($*)
+   until $SSHBIN ${args[@]} ;do
+      echo "[ERR] connecting: $SSHBIN ${args[@]} - reconnecting in $sshtimewait seconds"
+      sleep $sshtimewait
+   done
+}
+
 #=-=-=-= SSH Default users =-=-=-=#
-alias ec2='ssh -l ec2-user'
-alias admin='ssh -l admin'
-alias ubuntu='ssh -l ubuntu'
-alias centos='ssh -l centos'
-alias maloy='ssh -l maloy'
-alias debian='ssh -l debian'
-alias toor='ssh -l toor'
+alias ec2='connect_ssh -l ec2-user'
+alias admin='connect_ssh -l admin'
+alias ubuntu='connect_ssh -l ubuntu'
+alias centos='connect_ssh -l centos'
+alias maloy='connect_ssh -l maloy'
+alias debian='connect_ssh -l debian'
+alias toor='connect_ssh -l toor'
 
 
 #=-=-=-= SSH EC2 =-=-=-=#
