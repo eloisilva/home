@@ -8,6 +8,7 @@
 
 #-=-=-=-=- Workdir -=-=-=-=-#
 CASEDIR="${HOME}/Documents/cases/notes"
+TICKETDIR="${HOME}/Documents/cases/tickets"
 
 # Search for string in commits inside Workdir
 caseSearch() {
@@ -47,11 +48,26 @@ lsg(){
    ls -1th $Untracked_files
 }
 
+# caseGrep -- Search for word/sentences into case directory
+caseGrep(){
+   args="$@"
+   grep -rli "$args" $CASEDIR |grep [0-9]$ |xargs echo -n
+   unset args
+}
+
 
 #=-=-=-= Workdir Aliases =-=-=-=#
 alias activate_case="source ${CASEDIR}/current.sh"
 alias cdc='cd $CaseDIR'
 alias vic='vi +":set filetype=markdown" $CASE'
+
+alias activate_ticket="source ${TICKETDIR}/current.sh"
+alias cdt='cd $TicketDIR'
+alias vit='vi +":set filetype=markdown" $TICKET'
+
+alias cdn="cd ~/Documents/cases/notes"
+alias cdt="cd ~/Documents/cases/tickets"
+alias cdp="cd ~/Documents/Projects"
 
 # List case links
 #grep -r "\[[0-9][0-9]\]" . |awk '{if($3 ~ "^http") print $1, $3}' |grep -i ami"

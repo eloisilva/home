@@ -43,3 +43,4 @@ dwiki(){
 
 # Change directory to VimWiki home
 alias cdw="cd $VIMWIKI_HOME"
+alias sme="view $VIMWIKI_HOME/sme/ec2_linux/index.md"

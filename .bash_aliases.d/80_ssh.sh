@@ -17,6 +17,21 @@ function connect_ssh() {
    done
 }
 
+# Create a SSH tunnel to connect to VNC application
+macvnc(){
+   MACUSER="ec2-user"
+   args=("$@")
+   IP="${args[1]}"
+   VNCPORT="5900"
+   if ! lsof -nPiTCP:$VNCPORT -sTCP:LISTEN > /dev/null 2>&1 ;then
+      echo "ssh -fNL $VNCPORT:localhost:5900 $MACUSER@$IP ${args[@]:1}"
+      ssh -fNL $VNCPORT:localhost:5900 $MACUSER@$IP ${args[@]:1}
+   fi
+   open vnc://localhost:$VNCPORT
+   unset IP MACUSER VNCPORT args
+}
+
+
 #=-=-=-= SSH Default users =-=-=-=#
 alias ec2='connect_ssh -l ec2-user'
 alias admin='connect_ssh -l admin'
@@ -25,6 +40,7 @@ alias centos='connect_ssh -l centos'
 alias maloy='connect_ssh -l maloy'
 alias debian='connect_ssh -l debian'
 alias toor='connect_ssh -l toor'
+alias ssh_sessions='lsof -nP -iTCP:22 -sTCP:ESTABLISHED'
 
 
 #=-=-=-= SSH EC2 =-=-=-=#

@@ -69,7 +69,7 @@ Plug 'tpope/vim-fugitive'
 
 "=-=-= Code Languages =-=-=
 " Language Server Protocol (LSP)
-Plug 'w0rp/ale', { 'do': 'pip3 install flake8 isort yapf' }
+Plug 'w0rp/ale', { 'do': 'pip3 install --user flake8 isort yapf' }
 
 " A collection of language packs
 Plug 'sheerun/vim-polyglot'
@@ -81,7 +81,7 @@ Plug 'lyuts/vim-rtags'
 Plug 'leafgarland/typescript-vim'
 
 " Python
-Plug 'davidhalter/jedi-vim', { 'do': 'pip3 install jedi' }
+Plug 'davidhalter/jedi-vim', { 'do': 'pip3 --user install jedi' }
 
 " Allow run program tests inside vim
 Plug 'janko-m/vim-test'
@@ -108,7 +108,7 @@ Plug 'ap/vim-css-color'
 
 "=-=-= Autocomplete plugins =-=-=
 " Code completion
-Plug 'maralla/completor.vim', { 'do': 'pip3 install jedi' }
+Plug 'maralla/completor.vim', { 'do': 'pip3 --user install jedi' }
 
 
 "=-=-= Colorschemes plugins =-=-=

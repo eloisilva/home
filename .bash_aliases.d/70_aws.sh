@@ -103,9 +103,9 @@ ec2id(){
 }
 
 # Attach IAM Instance Profile to instance
-ec2profile(){
+ec2profile-association(){
    args=("$@")
-   [[ ${args[1]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   [[ ${args[1]} =~ ^"i-" ]] || args[1]="i-${args[1]}"
    aws ec2 associate-iam-instance-profile --iam-instance-profile "Name=${args[0]}" --instance-id ${args[@]:1}
    # Usage: ec2profile SSMCoreOnly i-xxx
 }
@@ -116,7 +116,13 @@ ec2list-tags(){
    aws ec2 describe-instances --query "Reservations[].Instances[].[InstanceId,Tags]" --instance-ids ${args[@]}
 }
 
+ec2profile-list(){
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=${args[0]}" ${args[@]:1}
+}
+
 #=-=-=-= AWSCLI Aliases =-=-=-=#
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
 #alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
-alias ec2list-profile='aws iam list-instance-profiles --query "InstanceProfiles[].Roles[].RoleName"'
+alias ec2iam-instance-profiles='aws iam list-instance-profiles --query "InstanceProfiles[].Roles[].RoleName"'
