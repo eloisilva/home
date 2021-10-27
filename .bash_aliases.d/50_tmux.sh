@@ -13,7 +13,11 @@ TMUX_NEW_SESSION="Lab"
 
 # New TMUX session
 tmn() {
-   tmux new -s $TMUX_NEW_SESSION -n $1
+   if [ -z $2 ] ;then
+      tmux new -s $TMUX_NEW_SESSION -n $1
+   else
+      tmux new -s $1 -n $2
+   fi
 }
 
 # Tmux Default
@@ -30,7 +34,7 @@ tm() {
    if [ -z $1 ] ;then
       tmd
    else
-      tmn $1
+      tmn $@
    fi
 }
 

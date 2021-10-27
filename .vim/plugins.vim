@@ -81,7 +81,7 @@ Plug 'lyuts/vim-rtags'
 Plug 'leafgarland/typescript-vim'
 
 " Python
-Plug 'davidhalter/jedi-vim', { 'do': 'pip3 --user install jedi' }
+Plug 'davidhalter/jedi-vim', { 'do': 'pip3 install --user jedi' }
 
 " Allow run program tests inside vim
 Plug 'janko-m/vim-test'
@@ -108,7 +108,7 @@ Plug 'ap/vim-css-color'
 
 "=-=-= Autocomplete plugins =-=-=
 " Code completion
-Plug 'maralla/completor.vim', { 'do': 'pip3 --user install jedi' }
+Plug 'maralla/completor.vim', { 'do': 'pip3 install --user jedi' }
 
 
 "=-=-= Colorschemes plugins =-=-=

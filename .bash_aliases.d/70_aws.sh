@@ -122,6 +122,19 @@ ec2profile-list(){
    aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=${args[0]}" ${args[@]:1}
 }
 
+ec2userData() {
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 modify-instance-attribute --instance-id ${args[0]} --attribute userData --value file://${args[@]:1}
+}
+
+ec2userData-list() {
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   printf $(aws ec2 describe-instance-attribute --instance-id ${args[0]} --attribute userData --query 'UserData.Value' ${args[@]:1} |cut -d'"' -f2 ) |base64 -D
+}
+
+
 #=-=-=-= AWSCLI Aliases =-=-=-=#
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
 #alias ec2run="aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]'"
