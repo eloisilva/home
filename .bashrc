@@ -28,7 +28,9 @@ get_branch ()
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-PS1='\[\033[31m\]${debian_chroot:+($debian_chroot)}\h:\[\033[0m\] (\w)\n[\A]\[\033[33m\]$(get_branch)\[\033[35m\]${SSH_CLIENT:+ <SSH> }\[\033[96m\]\$ \[\033[0m\]'
+# Terminal config (PS1)
+HOST_PS1_DESC=""
+PS1='\[\033[31m\]${debian_chroot:+($debian_chroot)}\h:\[\033[0m\] ${HOST_PS1_DESC:+--$HOST_PS1_DESC-- }(\w)\n[\A]\[\033[33m\]$(get_branch)\[\033[96m\]\$ \[\033[0m\]'
 
 
 #-=-=-=-=- SHELL functions -=-=-=-=-#
