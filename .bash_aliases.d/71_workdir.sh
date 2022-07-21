@@ -7,8 +7,11 @@
 #################################################################################
 
 #-=-=-=-=- Workdir -=-=-=-=-#
-CASEDIR="${HOME}/Documents/cases/notes"
-TICKETDIR="${HOME}/Documents/cases/tickets"
+PROJECTDIR="${HOME}/Documents/project"
+WORKLOGDIR="${HOME}/Documents/worklog"
+CASEDIR="${WORKLOGDIR}/cases"
+TICKETDIR="${WORKLOGDIR}/tickets"
+INTERVIEWDIR="${WORKLOGDIR}/interview"
 
 # Search for string in commits inside Workdir
 caseSearch() {
@@ -65,9 +68,11 @@ alias activate_ticket="source ${TICKETDIR}/current.sh"
 alias cdt='cd $TicketDIR'
 alias vit='vi +":set filetype=markdown" $TICKET'
 
-alias cdn="cd ~/Documents/cases/notes"
-alias cdt="cd ~/Documents/cases/tickets"
-alias cdp="cd ~/Documents/Projects"
+alias cdd="cd $WORKLOGDIR"
+alias cdn="cd $CASEDIR"
+alias cdo="cd $TICKETDIR"
+alias cdp="cd $PROJECTDIR"
+alias cdi="cd $INTERVIEWDIR"
 
 # List case links
 #grep -r "\[[0-9][0-9]\]" . |awk '{if($3 ~ "^http") print $1, $3}' |grep -i ami"

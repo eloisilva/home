@@ -6,6 +6,8 @@
 #     Description         :     GIT aliases
 #################################################################################
 
+#source /usr/local/etc/bash_completion.d/git-completion.bash
+
 #=-=-=-= GIT =-=-=-=#
 alias ga='git add'
 alias gm='git commit -m'

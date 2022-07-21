@@ -8,10 +8,10 @@
 #=-=-=-= Wiki Variables =-=-=-=#
 
 # Default browser binary
-BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox --new-tab"
+export BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox --new-tab"
 
 # VimWiki home
-VIMWIKI_HOME="~/Documents/wiki"
+export VIMWIKI_HOME="~/Documents/wiki"
 
 
 #=-=-=-= Wiki Functions =-=-=-=#
@@ -25,6 +25,20 @@ wiki(){
    fi
    $BROWSER http://localhost:8080
    unset IP
+}
+
+sme(){
+   case $1 in
+      l|lin|lnx|linux|Linux)
+         vi /Users/eloisilv/Documents/wiki/sme/ec2_linux/index.md
+      ;;
+      c|e|core|ec2|ec2core)
+         vi /Users/eloisilv/Documents/wiki/sme/ec2_core/index.md
+      ;;
+      *)
+         vi /Users/eloisilv/Documents/wiki/sme/index.md
+      ;;
+   esac
 }
 
 # Create SSH tunnel and open dokuwiki
@@ -43,4 +57,3 @@ dwiki(){
 
 # Change directory to VimWiki home
 alias cdw="cd $VIMWIKI_HOME"
-alias sme="view $VIMWIKI_HOME/sme/ec2_linux/index.md"

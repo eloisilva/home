@@ -134,6 +134,11 @@ ec2userData-list() {
    printf $(aws ec2 describe-instance-attribute --instance-id ${args[0]} --attribute userData --query 'UserData.Value' ${args[@]:1} |cut -d'"' -f2 ) |base64 -D
 }
 
+ec2stopall() {
+   (describe_ec2.py |awk -F'|' '{if($3 ~ "i-" && $4 ~ "running") print $3, $7}' |tr -s " ") |while read -r instance ;do
+      instance=($instance) ;i=${instance[0]} ;r=${instance[1]: -1}; ec2stop $i --region $r
+   done
+}
 
 #=-=-=-= AWSCLI Aliases =-=-=-=#
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}
