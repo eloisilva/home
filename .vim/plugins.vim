@@ -95,6 +95,9 @@ Plug 'benmills/vimux'
 " .tmux.conf integration like syntax highlighting, commentstring, etc.
 Plug 'tmux-plugins/vim-tmux'
 
+" Copy and send to tmux pane
+Plug 'jpalardy/vim-slime'
+
 " Markdown plugin
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -299,6 +302,13 @@ nmap <space>r :call VimuxRunCommand("clear; " . expand('%:p'))<CR><CR>
 " Run the current file as a command
 "nnoremap <Space>r :call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
 "nmap <leader>d :Dispatch expand('%:p')
+
+
+"-------------------
+" VIM Slime Plugin "
+"-------------------
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": ":.1"}
 
 
 "---------------------------

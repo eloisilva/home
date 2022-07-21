@@ -136,6 +136,7 @@ endif
 
 " Detect when a file was changed
 "set autoread
+"au FocusGained,BufEnter * :silent! !
 
 " Debian Style
 runtime! debian.vim
@@ -189,17 +190,7 @@ source ~/.vim/plugins.vim
 "       Templates        "
 "-------------------------
 
-" Bash vim template
-autocmd FileType sh source ~/.vim/sh.vim
-
-" Python vim template
-" autocmd FileType python source ~/.vim/python.vim
-
-" HTML vim template
-autocmd FileType html source ~/.vim/html.vim
-
-" Python Auto-Complete command
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
+" moved templates to ~/.vim/after/ftplugin/
 
 
 "-------------------------
@@ -254,10 +245,10 @@ endfunction
 "         NetRW          "
 "-------------------------
 let g:netrw_banner = 0
-let g:netrw_winsize = 20
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:NetrwIsOpen=0
+let g:netrw_browse_split = 2
+let g:netrw_winsize = 80
+nmap <leader>f :Explore<CR>
 
 "-----------------------------------------
 "-----------------------------------------
