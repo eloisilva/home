@@ -49,12 +49,17 @@ Plug 'shanzi/autoHEADER'
 " Grep - (map: <leader>rg)
 Plug 'jremmen/vim-ripgrep'
 
+
+" fzf fuzzy file finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " Fuzzy file, buffer, etc finder for Vim (map: ctrl-p)
 "Plug 'ctrlpvim/ctrlp.vim'
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim'
 
 " Vim plugin to list, select and switch between buffers
-Plug 'jeetsukumaran/vim-buffergator'
+"Plug 'jeetsukumaran/vim-buffergator'
 
 " Auto add delimiters like ],},),',",etc.
 Plug 'raimondi/delimitmate'
@@ -90,7 +95,8 @@ Plug 'janko-m/vim-test'
 Plug 'tpope/vim-dispatch'
 
 " Easily interact with tmux from vim (integration with vim-test plugin)
-Plug 'benmills/vimux'
+"Plug 'benmills/vimux'
+Plug 'preservim/vimux'
 
 " .tmux.conf integration like syntax highlighting, commentstring, etc.
 Plug 'tmux-plugins/vim-tmux'
@@ -159,6 +165,32 @@ let g:autoHEADER_auto_enable = 1
 let g:autoHEADER_default_author = "Eloi Silva"
 
 
+"-------------------
+" Fzf fuzzy finder "
+"-------------------
+" Map Files to ctrl+p
+nnoremap <C-p> :Files<Cr>
+
+" Search wiki files
+command! -bang WikiFiles call fzf#vim#files('~/Documents/wiki', <bang>0)
+nnoremap <leader>sw :WikiFiles
+
+" Search worklog files
+command! -bang WorklogFiles call fzf#vim#files('~/Documents/worklog', <bang>0)
+nnoremap <leader>sl :WorklogFiles
+
+" ripgrep function
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+
 "------------------------
 "        RipGrep        "
 "------------------------
@@ -166,29 +198,29 @@ if executable('rg')
   let g:rg_derive_root='true'
 endif
 
-nnoremap <leader>rg :Rg<SPACE>
+nnoremap <leader>rg :RG<SPACE>
 
 
 "------------------------
 "         ctrlp         "
 "------------------------
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_use_caching = 0
+"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+"let g:ctrlp_use_caching = 0
 
 " Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bm :CtrlPMixed<cr>
-nmap <leader>bs :CtrlPMRU<cr>
+"nmap <leader>bb :CtrlPBuffer<cr>
+"nmap <leader>bm :CtrlPMixed<cr>
+"nmap <leader>bs :CtrlPMRU<cr>
 
 
 "------------------------
 "      Buffergator      "
 "------------------------
 " I want my own keymappings...
-let g:buffergator_suppress_keymaps = 1
+"let g:buffergator_suppress_keymaps = 1
 
 " View the entire list of buffers open
-nmap <leader>bl :BuffergatorOpen<cr>
+"nmap <leader>bl :BuffergatorOpen<cr>
 
 
 "------------------------
@@ -243,6 +275,7 @@ let g:jedi#smart_auto_mappings = 1
 "------------------------
 "let test#python#runner = 'unittest'
 let test#python#runner = 'pytest'
+let test#strategy = "vimux"
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
@@ -296,6 +329,8 @@ noremap <silent> <leader>s :call completor#do('hover')<CR>
 "     Configure Vimux      "
 "---------------------------
 nmap <space>r :call VimuxRunCommand("clear; " . expand('%:p'))<CR><CR>
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
 
 " Run the current file with realpath (full path)
 "nnoremap <Space>r :call VimuxRunCommand("clear; " . expand('%:p'))<cr><cr>
