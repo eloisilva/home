@@ -30,6 +30,13 @@ amiSearch() {
    aws ec2 describe-images --image-ids ${args[@]}
 }
 
+# Reboot Instance
+ec2reboot() {
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 reboot-instances --instance-ids ${args[@]}
+}
+
 # Start Instance
 ec2start() {
    args=("$@")
@@ -51,16 +58,19 @@ ec2terminate() {
    aws ec2 terminate-instances --instance-ids ${args[@]}
 }
 
-ec2run() {
-   args=("$@")
-   SG="sg-0590e441933a35413"
-   INSTANCETYPE="t3.medium"
-   SSHKEY="Dublin-eu-west-1"
-   [[ ${args[0]} =~ ^"ami-" ]] || args[0]="ami-${args[0]}"
-   aws ec2 run-instances --instance-type $INSTANCETYPE --security-group-ids $SG --key-name $SSHKEY --image-id ${args[@]}
-   # Usage: ec2run ami-xxx --user-data file://UserDataScript.sh --region eu-west-1
-}
+# Launch new instance (deprecated)
+#ec2run() {
+   #args=("$@")
+   #SG="sg-0590e441933a35413"
+   #INSTANCETYPE="t3.medium"
+   ##SSHKEY=$(aws ec2 describe-key-pairs --query KeyPairs[].KeyName |jq .[] |grep $region |cut -d'"' -f2)
+   #SSHKEY="Dublin-eu-west-1"
+   #[[ ${args[0]} =~ ^"ami-" ]] || args[0]="ami-${args[0]}"
+   #aws ec2 run-instances --instance-type $INSTANCETYPE --security-group-ids $SG --key-name $SSHKEY --image-id ${args[@]}
+   ## Usage: ec2run ami-xxx --user-data file://UserDataScript.sh --region eu-west-1
+#}
 
+# Add tag key and value to instance
 ec2tag(){
    args=("$@")
    if [ ${#args[*]} -lt 2 ] ;then
@@ -110,35 +120,55 @@ ec2profile-association(){
    # Usage: ec2profile SSMCoreOnly i-xxx
 }
 
+# List instance tags
 ec2list-tags(){
    args=("$@")
    [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
    aws ec2 describe-instances --query "Reservations[].Instances[].[InstanceId,Tags]" --instance-ids ${args[@]}
 }
 
+# List instance profile associated
 ec2profile-list(){
    args=("$@")
    [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
    aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=${args[0]}" ${args[@]:1}
 }
 
+# Add userdata to instance
 ec2userData() {
    args=("$@")
    [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
    aws ec2 modify-instance-attribute --instance-id ${args[0]} --attribute userData --value file://${args[@]:1}
 }
 
+# List instance userdata
 ec2userData-list() {
    args=("$@")
    [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
    printf $(aws ec2 describe-instance-attribute --instance-id ${args[0]} --attribute userData --query 'UserData.Value' ${args[@]:1} |cut -d'"' -f2 ) |base64 -D
 }
 
+# Stop all instance (depend on python script and bash version)
 ec2stopall() {
    (describe_ec2.py |awk -F'|' '{if($3 ~ "i-" && $4 ~ "running") print $3, $7}' |tr -s " ") |while read -r instance ;do
       instance=($instance) ;i=${instance[0]} ;r=${instance[1]: -1}; ec2stop $i --region $r
    done
 }
+
+# Describe instances
+ec2describe() {
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 describe-instances --instance-id ${args[0]} ${args[@]:1}
+}
+
+# Describe instance attached EBS volumes
+ec2list-volumes() {
+   args=("$@")
+   [[ ${args[0]} =~ ^"i-" ]] || args[0]="i-${args[0]}"
+   aws ec2 describe-instances --query 'Reservations[].Instances[].BlockDeviceMappings[].[Ebs.VolumeId,DeviceName]' --instance-ids ${args[@]}
+}
+
 
 #=-=-=-= AWSCLI Aliases =-=-=-=#
 # List running instances. Fields = {InstanceID, Name, PublicIPAddress}

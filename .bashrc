@@ -1,3 +1,16 @@
+# Profile
+
+### Bash PATH
+export PATH="$HOME/scripts/bin:$HOME/.local/bin:$PATH"
+
+### History configuration
+export HISTSIZE=999999
+export HISTFILESIZE=999999
+export HISTCONTROL="ignoreboth:erasedups"
+
+### Python PATH
+export PYTHONPATH='/root/scripts/Python/Modules'
+
 # If not running interactively, don't do anything
 case $- in
    *i*) ;;
@@ -10,15 +23,6 @@ shopt -s histappend
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-### Bash PATH
-PATH="$HOME/scripts/bin:$HOME/.local/bin:$PATH"
-
-### History configuration
-export HISTFILESIZE=999999
-export HISTSIZE=999999
-export HISTCONTROL="ignoreboth:erasedups"
-export PYTHONPATH='/root/scripts/Python/Modules'
 
 # Terminal config (PS1)
 PROMPT_COMMAND="echo"

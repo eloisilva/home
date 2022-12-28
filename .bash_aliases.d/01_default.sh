@@ -24,6 +24,21 @@ alias grep='/usr/bin/grep --color'
 # display ipv4
 alias ips='ifconfig |egrep -o "([0-9]{1,3}\.){1,3}[0-9]{1,3}" --color'
 
+# MacVIM
+alias vi=vim
+
+# Display TCP LISTEN ports using lsof command
+alias tcplisten='lsof -PniTCP -sTCP:LISTEN'
+
+# Change lines into space and send to buffer
+alias tobuf="xargs echo |pbcopy"
+
+# Ansible ec2-invenroty python module
+alias ec2-inventory='ec2-inventory --list'
+
+# Show rsync progress
+alias rsync="rsync --progress"
+
 
 #=-=-=-= functions =-=-=-=#
 

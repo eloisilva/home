@@ -30,13 +30,13 @@ wiki(){
 sme(){
    case $1 in
       l|lin|lnx|linux|Linux)
-         vi /Users/eloisilv/Documents/wiki/sme/ec2_linux/index.md
+         vi $VIMWIKI_HOME/sme/ec2_linux/index.md
       ;;
       c|e|core|ec2|ec2core)
-         vi /Users/eloisilv/Documents/wiki/sme/ec2_core/index.md
+         vi $VIMWIKI_HOME/sme/ec2_core/index.md
       ;;
       *)
-         vi /Users/eloisilv/Documents/wiki/sme/index.md
+         vi $VIMWIKI_HOME/sme/index.md
       ;;
    esac
 }
