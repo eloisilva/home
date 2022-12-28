@@ -38,7 +38,7 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgray
 
 " Set search behave
-set ignorecase 
+set ignorecase
 set smartcase
 set hlsearch
 set incsearch
@@ -75,11 +75,16 @@ nmap <c-h> <c-w>h
 nmap <c-j> <c-w>j
 nmap <c-k> <c-w>k
 
+" Centrilize line scrolling
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 " Reload current file
 nnoremap <leader>e :e<cr>
 
 " Reload vimrc
 nnoremap <leader>r :source<Space>$MYVIMRC<cr>
+"nnoremap <leader>v :e<Space>$MYVIMRC<cr>
 
 " Search using // in Visual mode
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
@@ -123,6 +128,7 @@ set showbreak=...
 set path+=**
 set wildmenu
 set showmatch
+set completeopt=longest,menuone
 
 " Return to the same file line as before
 if has("autocmd")
@@ -227,6 +233,17 @@ endfunction
 
 noremap <Space>n :call PasteMode()<CR>
 
+" Log view mode
+function! LogView()
+  if &cursorline
+    set nocursorline
+  else
+    set cursorline
+    hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+  endif
+endfunction
+
+noremap <Space>l :call LogView()<CR>
 
 " Create python main to run when not imported
 function! PyMain()

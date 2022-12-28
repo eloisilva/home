@@ -171,6 +171,9 @@ let g:autoHEADER_default_author = "Eloi Silva"
 " Map Files to ctrl+p
 nnoremap <C-p> :Files<Cr>
 
+" Map Buffers to ctrl+p
+nnoremap <leader>b :Buffers<Cr>
+
 " Search wiki files
 command! -bang WikiFiles call fzf#vim#files('~/Documents/wiki', <bang>0)
 nnoremap <leader>sw :WikiFiles
@@ -320,7 +323,7 @@ noremap <silent> <leader>d :call completor#do('definition')<CR>
 " Show documentation completor#do('doc')
 noremap <silent> <leader>c :call completor#do('doc')<CR>
 " Format code completor#do('format')
-noremap <silent> <leader>f :call completor#do('format')<CR>
+noremap <silent> <leader>F :call completor#do('format')<CR>
 " Hover info (lsp hover) completor#do('hover')
 noremap <silent> <leader>s :call completor#do('hover')<CR>
 
